@@ -3,3 +3,5 @@ highlighter: rouge
 url: http://example.com
 lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore, Gemfile, Gemfile.lock]
+sass:
+  style: :expanded # You might prefer to minify using :compressed
