@@ -120,10 +120,15 @@ nav h1, nav h2 {
   font-size: 13px;
 }
 
+.highlight {
+  border-radius: 0.2em;
+}
+
 #post pre {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .4em;
+  font-family: Menlo, Monaco, monospace;
+  font-weight: bold;
+  line-height: normal;
+  padding: 1em 1em;
   margin-bottom: 20px !important;
 }
 
@@ -133,8 +138,6 @@ nav h1, nav h2 {
 }
 
 #post code {
-  border: 1px solid #ddd;
-  background-color: #eef;
   font-size: 85%;
   padding: 0 .2em;
 }
@@ -190,9 +193,9 @@ nav h1, nav h2 {
 
 #gravatar {
   width: 180px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  border-radius: 5%;
 }
 
 #stalker {

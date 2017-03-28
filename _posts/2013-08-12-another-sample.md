@@ -33,12 +33,38 @@ iPhone try-hard jean shorts.
 
 Syntax highlighting with Solarized theme.
 
-{% highlight ruby %}
-class User < ActiveRecord::Base
-  attr_accessible :email, :name
+```haskell
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE DeriveFunctor #-}
 
-  ... tons of other crap ...
+import Test.QuickCheck
+import Data.DeriveTH
+import Data.Binary
 
-end
+class Functor f => Applesauce f where
+  unit :: f ()
+  merge :: f a -> f b -> f (a, b)
 
-{% endhighlight %}
+class Applesauce m => Monkfish m where
+  yoin :: m (m a) -> m a
+
+ali fa = fmap snd (unit `merge` fa) == fa
+ari fa = fmap fst (fa `merge` unit) == fa
+
+--yoin . fmap yoin = yoin . yoin
+--yoin . fmap return = yoin . return = id
+--yoin . fmap (fmap f) = fmap f . yoin
+
+newtype ZipList a = ZipList [a] deriving (Show, Functor, Eq)
+
+"hi" 's' 23 2.3 Just 3
+
+$(derive makeArbitrary ''ZipList)
+
+instance Applesauce ZipList where
+  unit = ZipList []
+  merge (ZipList xs) (ZipList ys) = ZipList $ zip xs ys
+
+instance Monkfish ZipList where
+  yoin (ZipList xs) = ZipList $ concatMap (\(ZipList ys) -> ys) xs
+```

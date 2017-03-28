@@ -1,7 +1,7 @@
 # Theme customization - please change from the defaults!
 
 # Color for top bar, links, etc
-highlight_color: '#3498db'
+highlight_color: '#c11212'
 
 # Profile links on the left sidebar, leave blank to ignore
 social:
@@ -9,19 +9,18 @@ social:
   #bitbucket:
   hacker_news:
   #stackexchange:
-  #stackoverflow: 2061958
+  stackoverflow: 2061958
   twitter: ChrisMWendt
   #facebook:
   #tumblr:
-  #linkedin: chrismwendt
+  linkedin: chrismwendt
   #gplus:
-  #gravatar: 7c6c8647784cae80af5f575103af4c7e
+  gravatar: 7c6c8647784cae80af5f575103af4c7e
   #flickr:
 
-# "Hi, I'm _______"
 name: Chris Wendt
 email: chrismwendt@gmail.com
-tagline: "Software engineer, Haskell enthusiast, and Elasticsearch whisperer"
+tagline: "I'm a software engineer, Haskell enthusiast λ, and Elasticsearch whisperer."
 
 # Google Analytics key, leave blank to ignore
 google_analytics_key: UA-96340365-1
