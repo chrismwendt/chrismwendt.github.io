@@ -138,11 +138,18 @@ nav h1, nav h2 {
 }
 
 #post code {
-  font-size: 85%;
-  padding: 0 .2em;
+  font-family: Menlo, Monaco, monospace;
+  background-color: rgba(27,31,35,0.05);
+  border-radius: 3px;
+  padding: 3px;
 }
 
 #post pre code {
+  color: #f8f8f2;
+  background-color: transparent;
+  padding: 0px;
+  white-space: pre-wrap;
+  font-size: 85%;
   border: none;
 }
 
