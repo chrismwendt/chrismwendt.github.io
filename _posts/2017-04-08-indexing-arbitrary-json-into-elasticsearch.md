@@ -22,9 +22,9 @@ Index definition:
         "kv_pairs": {
           "type": "nested",
           "properties": {
-            "key": { "type": "string" },
+            "key": { "type": "string", "index": "not_analyzed" },
             "value": {
-              "type": "multi_field",
+              "type": "string",
               "fields": {
                 "raw_string": { "type": "string", "index": "not_analyzed" },
                 "analyzed_string": { "type": "string", "index": "analyzed" },
@@ -45,7 +45,7 @@ Pre-processing step example:
 
 ```
 $ echo '{"integer":3,"nested":{"inner":"object"}}' | \
-    jq '[leaf_paths as $path | {"key": $path | join("."), "value": getpath($path)}] | {kv_pairs: .}'
+    jq '[leaf_paths as $path | {"key": $path | map(tostring) | join("."), "value": getpath($path)}] | {kv_pairs: .}'
 {
   "kv_pairs": [
     {
