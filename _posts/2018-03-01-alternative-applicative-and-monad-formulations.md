@@ -5,17 +5,17 @@ categories:
 - blog
 ---
 
-There's are little known alternative class definitions of Applicative and Monad that I haven't seen presented in an article before, so I thought I'd share:
+There's a little known alternative class definitions of Applicative and Monad that I haven't seen presented in an article before, so I thought I'd share:
 
 ```haskell
 class Functor f => Applicative f where
   pure :: f ()
   (**) :: f a -> f b -> f (a, b)
 
--- Left identity:  pure ** v    ≅ v
--- Right identity: v    ** pure ≅ v
--- Associativity:  u ** (v ** w) ≅ (u ** v) ** w
--- (where ≅ refers to isomorphism)
+-- Left identity : pure ** v     ≅ v
+-- Right identity: v    ** pure  ≅ v
+-- Associativity : u ** (v ** w) ≅ (u ** v) ** w
+-- (≅ means isomorphism)
 
 class Applicative m => Monad m where
   join :: m (m a) -> m a
