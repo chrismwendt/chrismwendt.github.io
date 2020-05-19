@@ -16,33 +16,33 @@ readSTRef :: STRef s a -> ST s a
 writeSTRef :: STRef s a -> a -> ST s ()
 ```
 
-What if instead, `runST :: ST s a -> a`? Then you could easily make a new API:
+Let's drop `forall s` and see what happens:
 
 ```haskell
-newSTRef' :: a -> STRef s a
-readSTRef' :: STRef s a -> a
-writeSTRef' :: STRef s a -> a -> ()
+data ST s a
+
+runST :: ST s a -> a
+newSTRef :: a -> ST s (STRef s a)
+readSTRef :: STRef s a -> ST s a
+writeSTRef :: STRef s a -> a -> ST s ()
 ```
 
-This makes the output dependent on order of evaluation and whether or not code is optimized away:
+Well, now `ST` can be eliminated by calling `runST` after any other operation (e.g. `runST . newSTRef`):
 
 ```haskell
-let
-  n = newSTRef' 0
-in
-  print (writeSTRef' n 1, readSTRef' n) -- prints ((), 0) or ((), 1)?
+newSTRef :: a -> STRef s a
+readSTRef :: STRef s a -> a
+writeSTRef :: STRef s a -> a -> ()
 ```
 
-It also breaks equational reasoning:
+At the type level, `writeSTRef` looks useless, but it still has the side effect of writing a value to an `STRef`.
+
+Now the order of evaluation matters, and purity goes out the window:
 
 ```haskell
-let { n = newSTRef' 0; _ = writeSTRef' n 1; } in readSTRef' n
--- is not the same as
-let { n = newSTRef' 0; } in readSTRef' n
--- which is not the same as
-readSTRef' (newSTRef' 0)
--- which is not the same as
-0
+let ref = newSTRef "1"
+    _ = writeSTRef ref "2"
+in readSTRef ref -- Does this evaluate to "1" or "2"?
 ```
 
-The existential type variable `s` in `runST :: (forall s. ST s a) -> a` seems to prevent operations on references from being performed outside of a monad, which enforces evaluation order.
+`forall s` is the linchpin that enforces sequential reads/writes in the `ST` monad.
