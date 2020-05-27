@@ -43,4 +43,4 @@ As an aside, I don't think John is saying that the dependency-injection-like pro
 
 **Value of enforcing purity in CodeWyng** The first version of the part of CodeWyng that is now written in Haskell was originally written in TypeScript, and I switched exclusively for Haskell's vastly superior runtime support for concurrency and the Haskell ecosystem's stream parsing libraries. I definitely didn't switch in order to prevent myself from inadvertently mixing pure/impure code, and if it were to be rewritten in some other language (TypeScript/Go/etc.), I wouldn't consider the loss of enforcement of purity a downside.
 
-Conversation on [Zulip(https://funprog.zulipchat.com/#narrow/stream/201385-Haskell/topic/.22Effect.20tracking.20is.20worthless.22/near/198596066)
+Conversation on [Zulip](https://funprog.srid.ca/haskell/effect-tracking-is-worthless.html)
