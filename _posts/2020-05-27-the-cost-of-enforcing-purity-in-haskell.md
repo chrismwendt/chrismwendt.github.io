@@ -31,7 +31,7 @@ As an aside, I don't think John is saying that the dependency-injection-like pro
 
 - If it were worthwhile, annotation processors would be in widespread use for mainstream languages and have IDE support (proof by contradiction)
 - Tooling alone using static call tree analysis would achieve the same goal without placing a burden on the programmer
-- The Checker framework has no commercial traction https://checkerframework.org/manual/#purity-checker
+- The [Checker framework](https://checkerframework.org/manual/#purity-checker) has no commercial traction
 - PureScript went from pure+tags to pure (still enforces purity, but with less granularity)
 - Almost every other aspect of FP has been widely adopted while enforced purity has not: first-class and anonymous functions (e.g. in Java 8), lexical scoping (e.g. arrow functions for `this` and `let` vs `var` in JavaScript), immutable annotations (e.g. `const` vs `let` in JavaScript), option chaining (e.g. C#'s and TypeScript's `?.` operator), the `Maybe` data type (e.g. `Optional` in Java), parser combinators, QuickCheck, STM, list comprehensions, pattern matching, parametric polymorphism (A.K.A. generics), type inference, the list goes on...
 - Programmers already know using intuition with a high degree of certainty whether or not a function interacts with the world. Functions that violations that intuition are avoided and are quickly rectified or worked around (e.g. `java.net.URL#hashCode/equals` https://news.ycombinator.com/item?id=21765788
