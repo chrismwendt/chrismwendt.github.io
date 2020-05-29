@@ -39,7 +39,14 @@ As an aside, I don't think John is saying that the dependency-injection-like pro
 - Telling beginners "don't worry, you don't need to understand what `IO` is or how it works, just use these combinators you won't understand for the first 20 hours of learning Haskell" is Haskell's equivalent of "oh just ignore all that public static void main String[] args stuff for now and don't forget to wrap you hello world in a class"
 - I can't remember ever accidentally running IO at all or in the wrong order in any language (not just Haskell). It just doesn't seem to happen. I've been bitten by mutation quite a few times, but they were always a conscious choice of tradeoffs or something silly like JavaScript's `array.reverse()` which both mutates the array and returns a reversed shallow copy.
 
-**Experiment with strict impure Haskell** To get another data point, I'm considering modifying the Haskell backend of CodeWyng to use `LANGUAGE Strict` and insert `unsafePerformIO` in a bunch of places, especially at usages of `IORef`s and `MVar`s to see 1) if it works 2) if there are any bugs 3) if it's easier or more intuitive to program that way. Will post back here if/when I do.
+**Experiment with strict impure Haskell** To get another data point, I'm considering modifying the Haskell backend of CodeWyng to use `LANGUAGE Strict` and insert `unsafePerformIO` in a bunch of places, especially at usages of `IORef`s and `MVar`s to see 1) if it works 2) if there are any bugs 3) if it's easier or more intuitive to program that way. Will post back here if/when I do. **Update:**
+
+- Adding `{-# LANGUAGE Strict #-}` worked right away, I didn't notice any bugs
+- While replacing `IO` functions with impure non-`IO` versions, I replaced `withMVar` with an impure version and doing so caused an infinite loop, so I reverted that one
+- I found some dead code that was doing the equivalent of `x <- readMVar xVar`
+- Inlining variables into pure expressions helped align the code and prettify it
+- Some control functions like `unlessM` broke in unexpected ways
+- All I could think about for the last 25% was "man, all these tricks with `>>=`/`<-`/`<$>`/`=<<` to retain purity are completely unnecessary"
 
 **Value of enforcing purity in CodeWyng** The first version of the part of CodeWyng that is now written in Haskell was originally written in TypeScript, and I switched exclusively for Haskell's vastly superior runtime support for concurrency and the Haskell ecosystem's stream parsing libraries. I definitely didn't switch in order to prevent myself from inadvertently mixing pure/impure code, and if it were to be rewritten in some other language (TypeScript/Go/etc.), I wouldn't consider the loss of enforcement of purity a downside.
 
