@@ -1,0 +1,47 @@
+---
+layout: post
+title: Cleaning up threads in Haskell
+categories:
+- blog
+---
+
+How to clean up threads in a Haskell process at a high level:
+
+- Keep track of all currently-running threads in an `IORef (Set (Async a))`
+- When an exception occurs in any thread, hand it to the main thread with `putMVar exceptionVar exception`
+- Have the main thread wait for an exception then kill all currently-running threads
+
+Implementation:
+
+```haskell
+main = do
+  safeAsync $ runApp
+
+  dieOnException
+
+-- NOINLINE ensures that there is only one MVar
+{-# NOINLINE errorVar #-}
+errorVar = unsafePerformIO $ newEmptyMVar :: MVar SomeException
+
+-- Set of currently-running threads
+{-# NOINLINE asyncsRef #-}
+asyncsRef = unsafePerformIO $ newIORef Set.empty :: IORef (Set (Async a))
+
+-- Waits for an exception the kills all threads
+dieOnException = (readMVar errorVar >>= print) `finally` (do
+  mapM_ cancel =<< readIORef asyncsRef
+  putStrLn "exiting entire Haskell process"
+  exitFailure)
+
+-- A version of `async` that additionally stores itself in the currently-running threads.
+-- It also notifies the main thread when there's an exception.
+safeAsync a = do
+  asyncValue <- async a
+  forkIO $ do
+    (wait asyncValue `finally` (mod_ asyncsRef (Set.delete asyncValue))) `catches`
+      [ Handler $ \(e :: AsyncCancelled) -> return ()
+      , Handler $ \(e :: SomeException) -> putMVar errorVar e
+      ]
+  mod_ asyncsRef (Set.insert asyncValue)
+  return asyncValue
+```
