@@ -5,7 +5,9 @@ categories:
 - blog
 ---
 
-How to clean up threads in a Haskell process at a high level:
+When you `:reload` in GHCi or ghcid, only the main thread is killed. All other spawned threads continue to run. If you don't keep track of your threads and kill them when the main thread receives an exception, you can accidentally hold on to resources that should be released.
+
+Here's how to clean up threads at a high level:
 
 - Keep track of all currently-running threads in an `IORef (Set (Async a))`
 - When an exception occurs in any thread, hand it to the main thread with `putMVar exceptionVar exception`
