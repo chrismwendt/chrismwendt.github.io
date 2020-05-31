@@ -5,7 +5,7 @@ categories:
 - blog
 ---
 
-When you `:reload` in GHCi or ghcid, only the main thread is killed. All other spawned threads continue to run. If you don't keep track of your threads and kill them when the main thread receives an exception, you can accidentally hold on to resources that should be released.
+When your code gets reloaded in ghcid, only the main thread is killed (via a [`UserInterrupt`](https://hackage.haskell.org/package/base-4.14.0.0/docs/Control-Exception.html) exception). All other spawned threads continue to run. If you don't keep track of your threads and kill them when the main thread receives an exception, you can accidentally hold on to resources that should be released. Unfortunately, [GHCi cannot kill all threads](https://stackoverflow.com/questions/24999636/is-there-a-way-to-kill-all-forked-threads-in-a-ghci-session-without-restarting-i), so it's up to you the programmer to clean up.
 
 Here's how to clean up threads at a high level:
 
