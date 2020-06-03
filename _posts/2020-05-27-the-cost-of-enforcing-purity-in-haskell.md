@@ -9,7 +9,10 @@ categories:
 
 Looking past the distractions (the tongue-in-cheek sales rhetoric, the conspicuous advertisement for the ZIO project, and the vacuous is-Haskell-really-pure debate), there are some compelling arguments against enforcing purity that I've never heard before. The novelty of the counterarguments has drawn my attention to studying this subject further.
 
-Just to clarify, by "enforcing purity" I'm referring to modeling effects in the type system. The term is intended to be contrasted with languages that allow side-effects in functions and how programmers still write pure functions in them because purity has value in those languages, too (e.g. `function plus5(x) { return x + 5; }` in JavaScript).
+Because "effect tracking" is ambiguous and causes confusion, these terms might be useful in discussion:
+
+- **Enforcing purity** prevents the use of functions that interact with the world to be used in any context that doesn't allow it. The mechanism by which purity is enforced in Haskell is a combination of the type system (e.g. you can't use `IO Int` in a function like `sum :: [Int] -> Int`) and the specific interface to `IO` exposed to the programmer (i.e. all functions that interact with the world return something wrapped in `IO` and there is no `IO a -> a` to circumvent the intended interface, except for the backdoor `unsafePerformIO`).
+- **Dependency injection** is a technique where the implementation of dependencies of a function can be changed at the call site. For example, the dependency on the database can be swapped out for a mock implementation in tests. Some mechanisms by which dependency injection can be performed include: passing an explicit argument `runApp :: DB -> IO ()`, adding a type class constraint `runApp :: (HasDB m, MonadIO m) => m ()`, or mutating the global DB variable to set it to a mock implementation prior to running tests.
 
 As an aside, I don't think John is saying that the dependency-injection-like property of effects systems is worthless, but rather that any restriction-of-side-effects property (just like `IO` has) is worthless.
 
