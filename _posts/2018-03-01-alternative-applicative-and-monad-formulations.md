@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Altnerative Applicative and Monad formulations
+title: Alternative Applicative and Monad formulations
 categories:
 - blog
 ---

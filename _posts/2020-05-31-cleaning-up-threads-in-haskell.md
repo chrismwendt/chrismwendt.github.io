@@ -40,10 +40,10 @@ dieOnException = (readMVar errorVar >>= print) `finally` (do
 safeAsync a = do
   asyncValue <- async a
   forkIO $ do
-    (wait asyncValue `finally` (mod_ asyncsRef (Set.delete asyncValue))) `catches`
+    (wait asyncValue `finally` (atomicModifyIORef' asyncsRef (Set.delete asyncValue))) `catches`
       [ Handler $ \(e :: AsyncCancelled) -> return ()
       , Handler $ \(e :: SomeException) -> putMVar errorVar e
       ]
-  mod_ asyncsRef (Set.insert asyncValue)
+  atomicModifyIORef' asyncsRef (Set.insert asyncValue)
   return asyncValue
 ```
