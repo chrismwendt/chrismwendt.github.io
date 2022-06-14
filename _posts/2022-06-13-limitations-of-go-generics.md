@@ -23,7 +23,7 @@ Ideally, we could write the following generic `.connect()` method:
 func (s Stream[A, B]) connect[C any](other Stream[B, C]) Stream[A, C]
 ```
 
-But [Go does not allow type parameters in method declarations](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md#no-parameterized-methods). That means the `.connect()` method can't introduce new any new type:
+But [Go does not allow type parameters in method declarations](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md#no-parameterized-methods). That means the `.connect()` method can't introduce any new types:
 
 ```go
 //                                                      vvvvvv ✅ OK
