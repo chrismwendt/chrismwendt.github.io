@@ -38,6 +38,6 @@ Ask A: Is B Random?
 
 This code performs 10 sample runs with a random permutation each time (which only gives probabilistic evidence that it's correct).
 
-{% embed https://gist.github.com/chrismwendt/a48cf10fd90d2092b0760a6df6d75438 %}
+<!-- {% embed https://gist.github.com/chrismwendt/a48cf10fd90d2092b0760a6df6d75438 %} -->
 
 [wikipedia]: https://en.wikipedia.org/wiki/The_Hardest_Logic_Puzzle_Ever
