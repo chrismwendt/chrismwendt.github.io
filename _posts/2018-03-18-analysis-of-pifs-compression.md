@@ -1,8 +1,6 @@
 ---
-layout: post
 title: Analysis of pifs "compression"
-categories:
-- blog
+date: 20180318T00:00Z
 ---
 
 Issue [#10][2] of [pifs][1] (a file system that encodes files as their index in pi) asks about the expected amount of space that the index would take, and I became curious about this and did some research:

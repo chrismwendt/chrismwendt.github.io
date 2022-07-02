@@ -1,8 +1,6 @@
 ---
-layout: post
 title: 3 gods puzzle solution in Haskell
-categories:
-- blog
+date: 20180304T00:00Z
 ---
 
 # The Puzzle
@@ -40,6 +38,6 @@ Ask A: Is B Random?
 
 This code performs 10 sample runs with a random permutation each time (which only gives probabilistic evidence that it's correct).
 
-<script src="https://gist.github.com/chrismwendt/a48cf10fd90d2092b0760a6df6d75438.js"></script>
+{% embed https://gist.github.com/chrismwendt/a48cf10fd90d2092b0760a6df6d75438 %}
 
 [wikipedia]: https://en.wikipedia.org/wiki/The_Hardest_Logic_Puzzle_Ever

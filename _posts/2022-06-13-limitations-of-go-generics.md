@@ -1,8 +1,6 @@
 ---
-layout: post
 title: Limitations of Go generics
-categories:
-- blog
+date: 20220613T00:00Z
 ---
 
 Go does not allow type parameters (generics) in method declarations, and that limits the APIs you can make.

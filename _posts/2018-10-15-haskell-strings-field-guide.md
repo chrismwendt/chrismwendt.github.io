@@ -1,8 +1,6 @@
 ---
-layout: post
 title: Haskell strings field guide
-categories:
-- blog
+date: 20181015T00:00Z
 ---
 
 Here's how to convert between byte, string, and character types in Haskell:

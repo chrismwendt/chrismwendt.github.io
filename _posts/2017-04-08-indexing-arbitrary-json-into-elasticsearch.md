@@ -1,8 +1,6 @@
 ---
-layout: post
 title: Indexing arbitrary JSON into Elasticsearch
-categories:
-- blog
+date: 20170408T00:00Z
 ---
 
 Using the [Nested datatype][1], [Multi-fields][2], [`ignore_malformed`][3], and adding a pre-processing step to flatten nested JSON into key-value pairs, it's possible to index arbitrary JSON (even with type conflicts) into Elasticsearch.

@@ -1,8 +1,6 @@
 ---
-layout: post
 title: Introducing auto-nix-shell for consistent development environments
-categories:
-- blog
+date: 20180301T00:00Z
 ---
 
 <script src="https://asciinema.org/a/dFFhCmPULkqtIPLN8PrBjnjK0.js" id="asciicast-dFFhCmPULkqtIPLN8PrBjnjK0" async></script>
